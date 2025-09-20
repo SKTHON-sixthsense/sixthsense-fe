@@ -22,13 +22,21 @@ export default function My() {
             className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
             onClick={() => setTab("general")}
           >
-            <span className="text-[24px] font-[600] text-primary">기본 정보</span>
+            <span
+              className={`${tab === "general" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+            >
+              기본 정보
+            </span>
           </div>
           <div
             className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
             onClick={() => setTab("introduction")}
           >
-            <span className="text-[24px] font-[500]">자기소개서</span>
+            <span
+              className={`${tab === "introduction" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+            >
+              자기소개서
+            </span>
           </div>
           {/* 라인 */}
           <div
