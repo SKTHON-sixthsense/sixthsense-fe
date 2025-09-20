@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 export default function AiSection() {
   const recommended = {
     id: 1,
-    title: "서빙 알바 구합니다",
-    store: "한식당 맛나",
+    title: "주방 보조 구합니다",
+    store: "다시잡",
     location: "서울시 성북구 동선동 동소문로 20가길 2",
     date: "2025-09-20",
     uploadDate: "09.18",

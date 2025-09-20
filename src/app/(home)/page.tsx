@@ -60,7 +60,7 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="bg-[#9861A6]">
+      <main className="mb-[90px] bg-[#9861A6]">
         <header className="w-full bg-white p-[16px]">
           <Logo />
         </header>
