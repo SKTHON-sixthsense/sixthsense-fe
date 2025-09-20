@@ -119,6 +119,7 @@ export default function EmployDetailPage() {
             width={390}
             height={232}
             className="h-[232px] w-full object-cover"
+            unoptimized
           />
         </div>
       )}
@@ -162,7 +163,7 @@ export default function EmployDetailPage() {
             <p className="text-[20px] font-[500]">
               <span className="mr-[28px] text-[#919191]">급</span>{" "}
               <span className="mr-[30px] text-[#919191]">여</span>
-              {employ.pay}원
+              {employ.pay.toLocaleString()}원
             </p>
             <p className="text-[20px] font-[500]">
               <span className="mr-[25px] text-[#919191]">근무요일</span> {employ.date}
@@ -205,7 +206,7 @@ export default function EmployDetailPage() {
       </div>
 
       {/* 지원 방법 */}
-      <div className="mt-[12px] mb-[100px] bg-[#fff] p-[16px]">
+      <div className="mt-[12px] bg-[#fff] p-[16px] pb-[90px]">
         <p className="mb-[12px] text-[24px] font-[600]">지원방법</p>
         <div className="flex justify-center gap-4">
           <button className="flex flex-1 gap-2">
@@ -228,8 +229,8 @@ export default function EmployDetailPage() {
         description="지원 방식을 선택해주세요"
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="flex w-full items-center justify-center gap-4">
-          <button className="flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
+        <div className="mb-[20px] flex w-full items-center justify-center gap-4">
+          <button className="mt-[20px] flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
             <CallLarge />
             <span className="mt-[10px] text-center text-[24px] font-[500]">
               전화해서
@@ -237,7 +238,7 @@ export default function EmployDetailPage() {
               지원하기
             </span>
           </button>
-          <button className="flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
+          <button className="mt-[20px] flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
             <HomeLarge />
             <span className="mt-[10px] text-center text-[24px] font-[500]">
               홈페이지로 지원하기

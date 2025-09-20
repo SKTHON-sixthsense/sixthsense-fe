@@ -1,10 +1,10 @@
-import Header from "@/shared/components/Header";
+import BottomNavigation from "@/shared/components/BottomNavigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
       {children}
+      <BottomNavigation />
     </>
   );
 }

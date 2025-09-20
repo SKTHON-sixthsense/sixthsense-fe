@@ -3,28 +3,21 @@ import Chip from "../(component)/Chip";
 import ExperienceCard from "../(component)/ExperienceCard";
 import EmployCard from "@/app/(home)/EmployCard";
 import PencilPurple from "@/assets/icon/PencilPurple.svg";
+import { useQuery } from "@tanstack/react-query";
+import getMyInfo, { MyInfo } from "../(api)/getMyInfo";
+import { BaseResponse } from "@/shared/api/BaseResponse";
+import getCareer, { Career } from "../(api)/getCareer";
 
 export default function General() {
-  const info = {
-    name: "김다시",
-    age: 56,
-    gender: "여성",
-    phone: "010 - 1234 - 5678",
-    personality: ["성실함", "손이 빨라요"],
-    health: ["다리", "손목"],
-    experiences: [
-      {
-        location: "MIP 잠실점",
-        role: "주방 보조 업무",
-        onGoing: true,
-      },
-      {
-        location: "경복궁 잠실역점",
-        role: "설거지 및 주방 보조 업무",
-        period: "2022.05 - 2024.05",
-      },
-    ],
-  };
+  const { data: myInfoResponse } = useQuery<BaseResponse<MyInfo>>({
+    queryKey: ["my", "general"],
+    queryFn: getMyInfo,
+  });
+
+  const { data: careerResponse } = useQuery<BaseResponse<Career[]>>({
+    queryKey: ["my", "career"],
+    queryFn: getCareer,
+  });
 
   return (
     <>
@@ -50,25 +43,29 @@ export default function General() {
             {/* 이름 */}
             <div className="flex w-full items-center">
               <span className="flex-1 text-[18px] font-[500] text-[#686868]">이름</span>
-              <span className="flex-2 text-[20px] font-[500]">{info.name}</span>
+              <span className="flex-2 text-[20px] font-[500]">{myInfoResponse?.data?.name}</span>
             </div>
 
             {/* 나이 */}
             <div className="flex w-full items-center">
               <span className="flex-1 text-[18px] font-[500] text-[#686868]">나이</span>
-              <span className="flex-2 text-[20px] font-[500]">만 {info.age}세</span>
+              <span className="flex-2 text-[20px] font-[500]">
+                만 {myInfoResponse?.data?.age}세
+              </span>
             </div>
 
             {/* 성별 */}
             <div className="flex w-full items-center">
               <span className="flex-1 text-[18px] font-[500] text-[#686868]">성별</span>
-              <span className="flex-2 text-[20px] font-[500]">{info.gender}</span>
+              <span className="flex-2 text-[20px] font-[500]">
+                {myInfoResponse?.data?.gender === "MALE" ? "남성" : "여성"}
+              </span>
             </div>
 
             {/* 전화번호 */}
             <div className="flex w-full items-center">
               <span className="flex-1 text-[18px] font-[500] text-[#686868]">연락처</span>
-              <span className="flex-2 text-[20px] font-[500]">{info.phone}</span>
+              <span className="flex-2 text-[20px] font-[500]">{myInfoResponse?.data?.phone}</span>
             </div>
 
             {/* 이메일 */}
@@ -79,8 +76,8 @@ export default function General() {
         <div className="flex flex-col gap-[10px]">
           <span className="text-[18px] font-[500] text-[#686868]">성격</span>
           <div className="flex flex-wrap gap-[5px]">
-            {info.personality.map((personality) => (
-              <Chip key={personality} title={personality} />
+            {myInfoResponse?.data?.personality.map((personality) => (
+              <Chip key={personality.code} title={personality.name} />
             ))}
           </div>
         </div>
@@ -89,8 +86,8 @@ export default function General() {
         <div className="flex flex-col gap-[10px]">
           <span className="text-[18px] font-[500] text-[#686868]">아픈 건강 부위</span>
           <div className="flex flex-wrap gap-[5px]">
-            {info.health.map((health) => (
-              <Chip key={health} title={health} />
+            {myInfoResponse?.data?.health.map((health) => (
+              <Chip key={health.code} title={health.name} />
             ))}
           </div>
         </div>
@@ -100,9 +97,18 @@ export default function General() {
           <span className="text-[18px] font-[500] text-[#686868]">경력 사항</span>
 
           <div className="flex flex-col gap-[15px]">
-            {info.experiences.map((experience) => (
-              <ExperienceCard key={experience.location} {...experience} />
-            ))}
+            {careerResponse?.data?.map((experience) => {
+              const experienceProps = {
+                location: experience.companyName,
+                role: experience.task,
+                ...(experience.current
+                  ? { onGoing: true }
+                  : {
+                      period: `${experience.startDate} - ${experience.endDate}`,
+                    }),
+              };
+              return <ExperienceCard key={experience.id} {...experienceProps} />;
+            })}
           </div>
         </div>
       </section>

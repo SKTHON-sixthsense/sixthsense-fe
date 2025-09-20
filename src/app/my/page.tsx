@@ -2,7 +2,9 @@
 
 import General from "@/app/my/(tab)/General";
 import Introduction from "@/app/my/(tab)/Introduction";
-import useHeader from "@/shared/hooks/useHeader";
+import BottomNavigation from "@/shared/components/BottomNavigation";
+import Header from "@/shared/components/Header";
+import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
 import { useState } from "react";
 
 export default function My() {
@@ -13,34 +15,51 @@ export default function My() {
 
   const [tab, setTab] = useState<"general" | "introduction">("general");
 
-  return (
-    <main>
-      <div className="flex flex-col gap-[15px] bg-[#F4F4FB]">
-        {/* 탭 */}
-        <div className="relative flex items-center bg-white">
-          <div
-            className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
-            onClick={() => setTab("general")}
-          >
-            <span className="text-[24px] font-[600] text-primary">기본 정보</span>
-          </div>
-          <div
-            className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
-            onClick={() => setTab("introduction")}
-          >
-            <span className="text-[24px] font-[500]">자기소개서</span>
-          </div>
-          {/* 라인 */}
-          <div
-            className="absolute bottom-0 h-[4px] w-[50%] bg-primary transition-all duration-300"
-            style={{ left: `${tab === "general" ? "0%" : "50%"}` }}
-          ></div>
-        </div>
+  const headerHeight = useHeaderHeight();
 
-        {/* 내용 */}
-        {tab === "general" && <General />}
-        {tab === "introduction" && <Introduction />}
-      </div>
-    </main>
+  return (
+    <>
+      <Header />
+      <main>
+        <div className="flex flex-col gap-[15px] bg-[#F4F4FB]">
+          {/* 탭 */}
+          <div
+            className="sticky top-0 z-10 flex items-center bg-white"
+            style={{ top: headerHeight }}
+          >
+            <div
+              className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
+              onClick={() => setTab("general")}
+            >
+              <span
+                className={`${tab === "general" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+              >
+                기본 정보
+              </span>
+            </div>
+            <div
+              className="flex flex-1 items-center justify-center px-[40px] py-[20px]"
+              onClick={() => setTab("introduction")}
+            >
+              <span
+                className={`${tab === "introduction" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+              >
+                자기소개서
+              </span>
+            </div>
+            {/* 라인 */}
+            <div
+              className="absolute bottom-0 h-[4px] w-[50%] bg-primary transition-all duration-300"
+              style={{ left: `${tab === "general" ? "0%" : "50%"}` }}
+            ></div>
+          </div>
+
+          {/* 내용 */}
+          {tab === "general" && <General />}
+          {tab === "introduction" && <Introduction />}
+        </div>
+      </main>
+      <BottomNavigation />
+    </>
   );
 }
