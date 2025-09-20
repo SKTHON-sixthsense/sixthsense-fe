@@ -3,20 +3,20 @@
 import { useState } from "react";
 
 interface BottomButton {
-  text: string;
+  children: React.ReactNode;
   onClick: () => Promise<void>;
   disabled?: boolean;
   stickToBottom?: boolean;
 }
 
-const BottomButton = ({ text, onClick, disabled, stickToBottom }: BottomButton) => {
+const BottomButton = ({ children, onClick, disabled, stickToBottom }: BottomButton) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div
       className={
         stickToBottom
-          ? "fixed right-0 bottom-0 left-0 rounded-t-[10px] px-[16px] py-[10px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+          ? "fixed right-0 bottom-0 left-0 rounded-t-[10px] bg-white px-[16px] py-[10px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
           : ""
       }
     >
@@ -30,7 +30,7 @@ const BottomButton = ({ text, onClick, disabled, stickToBottom }: BottomButton) 
           });
         }}
       >
-        <span className={isLoading ? "invisible" : ""}>{text}</span>
+        <span className={isLoading ? "invisible" : ""}>{children}</span>
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-[20px] w-[20px] animate-spin rounded-full border-2 border-white border-t-transparent" />
