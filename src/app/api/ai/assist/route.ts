@@ -127,6 +127,8 @@ ${routesList}
   - 첫 번째 경로: 0 (즉시 이동)
   - 이후 경로들: 3000-7000ms (페이지 확인 시간)
 
+사용자의 요청이 명확하지 않은 경우, 사용자의 의도를 분석하여 적절한 페이지로 안내해주세요. (Fallback route: "/")
+
 ## 응답 형식:
 transcription: "${transcribedText}" (그대로 입력)
 intent: 사용자 의도 분석

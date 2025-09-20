@@ -47,6 +47,16 @@ const BottomNavigation = () => {
     setActiveMenu(activeMenu?.name || null);
   }, [path]);
 
+  useEffect(() => {
+    const nav = document.querySelector("nav");
+    if (nav) {
+      const navHeight = nav.offsetHeight;
+      document.body.style.paddingBottom = `${navHeight + 10}px`;
+    }
+    return () => {
+      document.body.style.paddingBottom = "";
+    };
+  }, []);
   return (
     <nav className="fixed right-0 bottom-0 left-0 z-50 flex items-center justify-evenly gap-[8px] bg-white py-[12px]">
       {menus.map((menu) => (
