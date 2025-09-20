@@ -49,11 +49,12 @@ export default function Introduction() {
       <span className="text-[24px] font-[600]">자기소개서</span>
       {/* 자기소개서 */}
       <textarea
-        className={`h-[300px] w-full resize-none bg-neutral-100 p-1 text-[18px] font-[400] ${
+        className={`h-[300px] w-full resize-none rounded-[10px] border border-[#707070] bg-white p-[16px] text-[18px] font-[400] ${
           postIntroductionMutation.isPending ? "opacity-50" : ""
         }`}
         readOnly={postIntroductionMutation.isPending}
         value={text}
+        placeholder="수기로 작성한 자기소개서 사진을 첨부하여 나만의 자기소개서를 만들어보세요"
         onChange={(e) => setText(e.target.value)}
       />
 
