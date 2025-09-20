@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { internalAPI } from "../api/apiInstance";
+import MicPurple from "@/assets/icon/MicPurple.svg";
 
 interface RouteItem {
   route: string;
@@ -202,22 +203,10 @@ export const AIAssistant = () => {
               duration: 0.3,
             }}
             onClick={handleToggleRecording}
-            className="fixed right-6 bottom-6 z-[1000] h-16 w-16 rounded-full bg-blue-500 shadow-lg transition-colors duration-300 hover:bg-blue-600"
+            className="fixed right-6 bottom-30 z-[1000] rounded-full border border-primary bg-white p-[8px] shadow-lg"
           >
             <div className="flex items-center justify-center">
-              <svg
-                className="h-6 w-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                />
-              </svg>
+              <MicPurple />
             </div>
           </motion.button>
         )}

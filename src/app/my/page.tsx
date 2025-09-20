@@ -7,7 +7,6 @@ import Header from "@/shared/components/Header";
 import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
 import { useQueryStateWithoutSuspense } from "@/shared/hooks/useQueryStateWIthoutSuspense";
 import { parseAsString } from "nuqs";
-
 export default function My() {
   useHeader({
     title: "나의 정보",
@@ -36,7 +35,9 @@ export default function My() {
               onClick={() => setTab("general")}
             >
               <span
-                className={`${tab === "general" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+                className={`${
+                  tab === "general" ? "font-[600] text-primary" : "font-[500]"
+                } text-[24px]`}
               >
                 기본 정보
               </span>
@@ -46,7 +47,9 @@ export default function My() {
               onClick={() => setTab("introduction")}
             >
               <span
-                className={`${tab === "introduction" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+                className={`${
+                  tab === "introduction" ? "font-[600] text-primary" : "font-[500]"
+                } text-[24px]`}
               >
                 자기소개서
               </span>
