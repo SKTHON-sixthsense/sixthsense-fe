@@ -1,5 +1,8 @@
+import Link from "next/link";
 import Chip from "../(component)/Chip";
 import ExperienceCard from "../(component)/ExperienceCard";
+import EmployCard from "@/app/(home)/EmployCard";
+import PencilPurple from "@/assets/icon/PencilPurple.svg";
 
 export default function General() {
   const info = {
@@ -27,10 +30,18 @@ export default function General() {
     <>
       <section
         id="general"
-        className="flex flex-col gap-[30px] bg-white px-[16px] pt-[50px] pb-[20px]"
+        className="flex flex-col gap-[30px] bg-white px-[16px] pt-[20px] pb-[20px]"
       >
+        {/* 수정하기 */}
+        <Link
+          href="/my/edit/general"
+          className="inline-flex items-center justify-end gap-[5px] text-right text-[18px] font-[500] text-[#B45EC9] underline underline-offset-auto"
+        >
+          수정하기 <PencilPurple />
+        </Link>
+
         {/* 인적사항 */}
-        <div className="flex gap-[16px]">
+        <div className="mt-[10px] flex gap-[16px]">
           {/* 사진 */}
           <div className="w-[120px] bg-neutral-200"></div>
 
@@ -97,8 +108,19 @@ export default function General() {
       </section>
 
       {/* 지원 완료 공고 */}
-      <section id="applied" className="mt-[40px] px-[16px]">
+      <section id="applied" className="mt-[40px] flex flex-col gap-[20px] px-[16px] pb-[20px]">
         <span className="text-[24px] font-[600]">지원 완료 공고</span>
+
+        <EmployCard
+          id={1}
+          uploadDate="09.18"
+          title="주3회 주방보조 및 설거지 아르바이트 구합니다"
+          store="짬뽕선수"
+          location="서울시 성북구 동선동3가"
+          date="요일협의"
+          time="10:00~16:00"
+          pay={12000}
+        />
       </section>
     </>
   );

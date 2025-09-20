@@ -45,7 +45,7 @@ const Steps: Record<number, Step> = {
     element: <SelectJob />,
   },
   4: {
-    title: "건강 상태",
+    title: "건강 상태 선택",
     description: (
       <>
         일하는데 우려되는
