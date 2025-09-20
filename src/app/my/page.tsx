@@ -5,7 +5,7 @@ import Introduction from "@/app/my/(tab)/Introduction";
 import BottomNavigation from "@/shared/components/BottomNavigation";
 import Header from "@/shared/components/Header";
 import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
-import { useState } from "react";
+import { parseAsString, useQueryState } from "nuqs";
 
 export default function My() {
   useHeader({
@@ -13,7 +13,10 @@ export default function My() {
     alignTitle: "center",
   });
 
-  const [tab, setTab] = useState<"general" | "introduction">("general");
+  const [tab, setTab] = useQueryState(
+    "tab",
+    parseAsString.withDefault("general").withOptions({ clearOnDefault: false })
+  );
 
   const headerHeight = useHeaderHeight();
 
@@ -32,7 +35,9 @@ export default function My() {
               onClick={() => setTab("general")}
             >
               <span
-                className={`${tab === "general" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+                className={`${
+                  tab === "general" ? "font-[600] text-primary" : "font-[500]"
+                } text-[24px]`}
               >
                 기본 정보
               </span>
@@ -42,7 +47,9 @@ export default function My() {
               onClick={() => setTab("introduction")}
             >
               <span
-                className={`${tab === "introduction" ? "font-[600] text-primary" : "font-[500]"} text-[24px]`}
+                className={`${
+                  tab === "introduction" ? "font-[600] text-primary" : "font-[500]"
+                } text-[24px]`}
               >
                 자기소개서
               </span>

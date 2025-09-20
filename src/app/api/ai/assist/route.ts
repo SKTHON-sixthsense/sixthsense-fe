@@ -6,13 +6,30 @@ import OpenAI from "openai";
 
 // Available routes and their descriptions for the AI assistant
 const AVAILABLE_ROUTES = {
-  "/": "홈페이지 - 메인 페이지, 구인 정보를 검색하고 볼 수 있습니다",
-  "/home": "홈 - 기본 홈 페이지",
-  "/my": "나의 정보 - 사용자의 기본 정보와 자기소개서를 관리할 수 있습니다",
-  "/my/edit/general": "기본 정보 수정 - 개인 정보를 수정할 수 있습니다",
-  "/my/edit/general/health": "건강 상태 선택 - 건강 상태를 설정할 수 있습니다",
-  "/my/edit/general/personality": "성격 선택 - 성격 유형을 선택할 수 있습니다",
-  "/onboarding": "온보딩 - 새 사용자를 위한 초기 설정 과정입니다",
+  // 메인페이지
+  "/": "홈페이지 첫화면, 메인 페이지 - 채용 공고와 구인 정보를 검색하고 볼 수 있습니다. 사용자 맞춤형 공고가 올라오고, 필터를 통해 원하는 지역, 원하는 직종을 선택하여 공고를 확인할 수 있습니다.",
+  // 마이페이지
+  "/my": "나의 정보, 내 계정, 설정 - 사용자의 기본 정보와 자기소개서를 관리할 수 있습니다.",
+  "/my?tab=general":
+    "나의 정보 -> 기본 정보, 내 인적사항 - 사용자의 기본 정보를 관리할 수 있습니다. 이름, 나이, 성별, 연락처, 성격, 아픈 건강 부위, 경력 사항을 볼 수 있습니다.",
+  "/my?tab=introduction":
+    "나의 정보 -> 자기소개서 - 사용자의 자기소개서를 관리할 수 있습니다. 직접 수정하거나 사진을 찍어 자기소개서를 작성할 수 있습니다.",
+  "/my/edit/general": "기본 정보 수정 - 사용자의 기본 정보를 수정할 수 있습니다.",
+  "/my/edit/general/health":
+    "기본 정보 수정 -> 건강 상태 선택 - 사용자의 건강 상태를 설정할 수 있습니다.",
+  "/my/edit/general/personality":
+    "기본 정보 수정 -> 성격 선택 - 사용자의 성격 유형을 선택할 수 있습니다.",
+  // 온보딩
+  "/onboarding":
+    "온보딩, 로그인 후 첫화면 - 새 사용자를 위한 초기 설정 과정입니다. 지역, 직종, 직무를 선택하여 시작할 수 있습니다.",
+  // 교육
+  "/education": "교육 - 사용자의 구직 활동을 위한 관련 교육 정보 및 자격증 등을 볼 수 있습니다. ",
+  // 관심
+  "/interest":
+    "관심 - 사용자가 관심 공고로 직접 선택한 공고들과 관심 교육을 모두 확인할 수 있습니다.",
+  // 특수 명령
+  BACK: "뒤로 가기",
+  FORWARD: "앞으로 가기",
 };
 
 // Schema for structured output with routing queue support
@@ -59,6 +76,7 @@ export async function POST(req: NextRequest) {
       model: "gpt-4o-mini-transcribe",
       language: "ko", // Korean language
       response_format: "text",
+      temperature: 0,
     });
 
     const transcribedText = transcriptionResult.trim();
@@ -107,7 +125,7 @@ ${routesList}
 - route: 정확한 경로 (예: "/", "/my") 또는 특수 명령 ("BACK", "FORWARD"),
 - delay: 이전 페이지에서 머무를 시간 (밀리초)
   - 첫 번째 경로: 0 (즉시 이동)
-  - 이후 경로들: 1500-3000ms (페이지 확인 시간)
+  - 이후 경로들: 3000-7000ms (페이지 확인 시간)
 
 ## 응답 형식:
 transcription: "${transcribedText}" (그대로 입력)
@@ -124,12 +142,6 @@ routingQueue: [
 "뒤로 가기" →
 routingQueue: [
   { route: "BACK", delay: 0 }
-]
-
-"뒤로 갔다가 다시 앞으로 가줘" →
-routingQueue: [
-  { route: "BACK", delay: 0 },
-  { route: "FORWARD", delay: 1500 }
 ]
       `,
     });
