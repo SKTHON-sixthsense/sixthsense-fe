@@ -21,7 +21,9 @@ const Header = () => {
         {title}
       </h1>
 
-      {secondaryButton && <div className="ml-auto h-[32px] w-[32px]">{secondaryButton}</div>}
+      {(showBackButton || secondaryButton) && (
+        <div className="ml-auto h-[32px] w-[32px]">{secondaryButton}</div>
+      )}
 
       {typeof progress === "number" && (
         <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[#E4E4E4]">
