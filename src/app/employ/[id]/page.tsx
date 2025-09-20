@@ -160,11 +160,16 @@ export default function EmployDetailPage() {
       <div className="flex flex-col gap-2 rounded-[10px] bg-white p-4 text-[16px]">
         {activeTab === "work" ? (
           <>
-            <p className="text-[20px] font-[500]">
-              <span className="mr-[28px] text-[#919191]">급</span>{" "}
-              <span className="mr-[30px] text-[#919191]">여</span>
+            <div className="flex text-[20px] font-[500]">
+              <p>
+                <span className="mr-[28px] text-[#919191]">급</span>{" "}
+                <span className="mr-[30px] text-[#919191]">여</span>
+              </p>
+              <div className="mr-[7px] rounded-[20px] bg-[#FFC35D] px-[10px] pt-[3px] text-[18px] text-white">
+                시급
+              </div>
               {employ.pay.toLocaleString()}원
-            </p>
+            </div>
             <p className="text-[20px] font-[500]">
               <span className="mr-[25px] text-[#919191]">근무요일</span> {employ.date}
             </p>{" "}
