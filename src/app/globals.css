@@ -25,4 +25,5 @@
 
 body {
   color: #272727;
+  min-height: 100vh;
 }
