@@ -24,7 +24,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
-    "zod": "^3.25.76",
+    "react-kakao-maps-sdk": "^1.2.0",
+    "zod": "^4.1.9",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
