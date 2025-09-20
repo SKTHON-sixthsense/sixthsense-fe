@@ -2,10 +2,18 @@
 
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import useHeader from "@/shared/hooks/useHeader";
+import BottomButton from "@/shared/components/BottomButton";
+import Modal from "@/shared/components/Modal";
+
 import Image from "next/image";
 import Home from "@/assets/icon/Home.svg";
 import Call from "@/assets/icon/Call.svg";
+import HomeLarge from "@/assets/icon/HomeLarge.svg";
+import CallLarge from "@/assets/icon/CallLarge.svg";
 import KakaoMap from "./KakaoMap";
+import Header from "@/shared/components/Header";
 
 interface Employ {
   id: number;
@@ -76,11 +84,19 @@ const employData: Employ[] = [
 ];
 
 export default function EmployDetailPage() {
+  const router = useRouter();
   const params = useParams();
   const { id } = params;
 
+  useHeader({
+    showBackButton: true,
+    onBackButtonClick: () => router.back(),
+  });
+
   const [employ, setEmploy] = useState<Employ | null>(null);
   const [activeTab, setActiveTab] = useState<"work" | "recruit">("work");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const found = employData.find((e) => e.id === Number(id));
     setEmploy(found ?? null);
@@ -88,8 +104,13 @@ export default function EmployDetailPage() {
 
   if (!employ) return <div className="p-4">해당 공고를 찾을 수 없습니다.</div>;
 
+  const handleApply = async () => {
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="mx-auto max-w-3xl bg-[#F4F4FB]">
+    <div className="mx-auto min-h-screen max-w-3xl bg-[#F4F4FB] pb-4">
+      <Header />
       {employ.imageUrl && (
         <div className="w-full">
           <Image
@@ -177,14 +198,14 @@ export default function EmployDetailPage() {
       <div className="mt-[12px] bg-[#fff] p-[16px]">
         <p className="text-[24px] font-[600]">근무지</p>
         <p className="text-[20px] font-[500] text-[#686868]">{employ.location}</p>
-        {/* 카카오맵 호출하는 부분  */}
+        {/* 카카오맵 호출 */}
         <div className="mt-2">
           <KakaoMap address={employ.location} />
         </div>
       </div>
 
       {/* 지원 방법 */}
-      <div className="mt-[12px] bg-[#fff] p-[16px]">
+      <div className="mt-[12px] mb-[100px] bg-[#fff] p-[16px]">
         <p className="mb-[12px] text-[24px] font-[600]">지원방법</p>
         <div className="flex justify-center gap-4">
           <button className="flex flex-1 gap-2">
@@ -197,6 +218,33 @@ export default function EmployDetailPage() {
           </button>
         </div>
       </div>
+      <BottomButton stickToBottom onClick={handleApply}>
+        지원하기
+      </BottomButton>
+      {/* 모달 */}
+      <Modal
+        isOpen={isModalOpen}
+        title="지원하기"
+        description="지원 방식을 선택해주세요"
+        onClose={() => setIsModalOpen(false)}
+      >
+        <div className="flex w-full items-center justify-center gap-4">
+          <button className="flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
+            <CallLarge />
+            <span className="mt-[10px] text-center text-[24px] font-[500]">
+              전화해서
+              <br />
+              지원하기
+            </span>
+          </button>
+          <button className="flex w-full flex-col items-center justify-center gap-2 rounded-[10px] bg-[#F4F4FB] p-6">
+            <HomeLarge />
+            <span className="mt-[10px] text-center text-[24px] font-[500]">
+              홈페이지로 지원하기
+            </span>
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
