@@ -36,7 +36,7 @@ export default function Header({ location, jobs, onChangeJobs }: HeaderProps) {
               jobs.map((job, idx) => (
                 <span
                   key={idx}
-                  className="rounded-full bg-[#F4F4FB] px-[18px] py-[10px] text-[18px] font-[500] text-[#87659C]"
+                  className="rounded-full bg-[#F4F4FB] px-[18px] py-[7px] text-[18px] font-[500] text-[#87659C]"
                 >
                   {job}
                 </span>

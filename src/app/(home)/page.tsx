@@ -2,7 +2,7 @@ import Content from "./Content";
 import Header from "./Header";
 
 export default function HomePage() {
-  const location = "서울시 강남구";
+  const location = "서울시 성북구";
   const jobs = ["직업1", "직업2"];
 
   return (
