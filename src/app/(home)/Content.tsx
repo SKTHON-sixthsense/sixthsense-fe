@@ -9,6 +9,7 @@ interface ContentProps {
     salary: string;
     workDays: string;
     workHours: string;
+    createDate: string;
   }[];
   loading: boolean;
 }
@@ -36,7 +37,7 @@ export default function Content({ employs, loading }: ContentProps) {
               store={employ.companyName}
               location={shortLocation}
               date={employ.workDays}
-              uploadDate="-"
+              uploadDate={employ.createDate}
               time={employ.workHours}
               pay={Number(employ.salary.replace(/\D/g, "")) || 0}
             />

@@ -42,7 +42,10 @@ export default function EduPage() {
       </header>
 
       {/* 광고 배너 */}
-      <div className="mt-[15px] bg-[#8AD7CA] p-[24px] text-[20px] font-[600] text-white">
+      <div
+        className="mt-[15px] cursor-pointer bg-[#8AD7CA] p-[24px] text-[20px] font-[600] text-white"
+        onClick={() => window.open("https://news.seoul.go.kr/welfare/50plus", "_blank")}
+      >
         <div className="flex gap-[30px]">
           <span>중장년이 열어가는 앞으로의 50년</span>
           <StarAd />
