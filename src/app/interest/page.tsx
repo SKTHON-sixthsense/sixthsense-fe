@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import EduCard from "../education/EduCard";
 import EmployCard from "../(home)/EmployCard";
+import useHeader from "@/shared/hooks/useHeader";
 
 type Edu = {
   id: number;
@@ -20,6 +21,12 @@ type Job = {
 };
 
 export default function InterestPage() {
+  useHeader({
+    title: "관심 정보",
+    alignTitle: "left",
+    showBackButton: true,
+  });
+
   const [jobs, setJobs] = useState<Job[]>([]);
   const [edus, setEdus] = useState<Edu[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,33 +63,32 @@ export default function InterestPage() {
   }, []);
 
   return (
-    <div className="bg-[#F4F4FB]">
-      <header className="w-full bg-white pt-[20px] pb-[16px]">
-        <p className="pl-[16px] text-[24px] font-[600]">관심 정보</p>
-      </header>
-
+    <main className="bg-[#F4F4FB]">
       {/* 관심 공고 섹션 */}
       <div className="m-[16px]">
-        <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관심 공고</p>
-        {loading ? (
-          <p className="text-center text-gray-500">로딩 중...</p>
-        ) : jobs.length > 0 ? (
-          jobs.map((job) => (
-            <EmployCard
-              key={job.id}
-              id={job.id}
-              title={job.title}
-              location={job.location}
-              time={job.time}
-              pay={job.pay}
-              uploadDate={""}
-              store={""}
-              date={""}
-            />
-          ))
-        ) : (
-          <p className="text-center text-gray-500">관심 공고가 없습니다.</p>
-        )}
+        <p className="px-[16px] pt-[28px] pb-[16px] text-[24px] font-[600]">관심 공고</p>
+
+        <div className="flex flex-col gap-[15px]">
+          {loading ? (
+            <p className="text-center text-gray-500">로딩 중...</p>
+          ) : jobs.length > 0 ? (
+            jobs.map((job) => (
+              <EmployCard
+                key={job.id}
+                id={job.id}
+                title={job.title}
+                location={job.location}
+                time={job.time}
+                pay={job.pay}
+                uploadDate={""}
+                store={""}
+                date={""}
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500">관심 공고가 없습니다.</p>
+          )}
+        </div>
       </div>
 
       {/* 관심 교육 섹션 */}
@@ -98,6 +104,6 @@ export default function InterestPage() {
           <p className="text-center text-gray-500">관심 교육이 없습니다.</p>
         )}
       </div>
-    </div>
+    </main>
   );
 }

@@ -48,7 +48,7 @@ const BottomNavigation = () => {
   }, [path]);
 
   return (
-    <nav className="sticky right-0 bottom-0 left-0 z-50 flex items-center justify-evenly gap-[8px] bg-white py-[12px]">
+    <nav className="fixed right-0 bottom-0 left-0 z-50 flex items-center justify-evenly gap-[8px] bg-white py-[12px]">
       {menus.map((menu) => (
         <Link href={menu.path} key={menu.name} className="flex flex-col items-center px-[12px]">
           {menu.icon(menu.name === activeMenu)}
