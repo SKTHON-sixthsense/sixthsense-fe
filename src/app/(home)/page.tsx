@@ -7,6 +7,7 @@ import { privateAPI } from "@/shared/api/apiInstance";
 import { useEffect, useState } from "react";
 
 import Logo from "@/assets/icon/Logo.svg";
+import BottomNavigation from "@/shared/components/BottomNavigation";
 
 interface Employ {
   id: number;
@@ -31,8 +32,6 @@ interface Employ {
 export default function HomePage() {
   const [employs, setEmploys] = useState<Employ[]>([]);
   const [loading, setLoading] = useState(true);
-  const location = "서울시 성북구";
-  const jobs: string[] = [];
 
   useEffect(() => {
     const fetchEmploys = async () => {
@@ -59,13 +58,16 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="bg-[#9861A6]">
-      <header className="w-full bg-white p-[16px]">
-        <Logo />
-      </header>
-      <AiSection />
-      <FilterBar location={location} jobs={jobs} />
-      <Content employs={employs} loading={loading} />
-    </main>
+    <>
+      <main className="bg-[#9861A6]">
+        <header className="w-full bg-white p-[16px]">
+          <Logo />
+        </header>
+        <AiSection />
+        <FilterBar />
+        <Content employs={employs} loading={loading} />
+      </main>{" "}
+      <BottomNavigation />
+    </>
   );
 }

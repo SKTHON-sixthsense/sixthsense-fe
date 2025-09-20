@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ItemBlock from "../../(component)/ItemBlock";
 import { useQuery } from "@tanstack/react-query";
 import getJobField from "../../(api)/getJobField";

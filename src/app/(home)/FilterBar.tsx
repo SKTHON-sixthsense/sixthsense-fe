@@ -1,16 +1,21 @@
 import Location from "@/assets/icon/Location.svg";
 import ArrowDown from "@/assets/icon/ArrowDown.svg";
+import Link from "next/link";
+import useLocalStorage from "@/shared/hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 
-interface FilterProps {
-  location: string;
-  jobs: string[];
-  onChangeJobs?: () => void;
-}
+export default function Filter() {
+  const router = useRouter();
 
-export default function Filter({ location, jobs, onChangeJobs }: FilterProps) {
+  const { value: detailedJobCategories } = useLocalStorage("detailedJobCategories");
+
+  const jobs = detailedJobCategories ? (JSON.parse(detailedJobCategories) as string[]) : [];
+
+  const { value: location } = useLocalStorage("district");
+
   return (
     <div className="w-full rounded-t-[20px] bg-white p-[16px]">
-      <div className="flex">
+      <div className="flex" onClick={() => router.push("/filter/location")}>
         <Location />
         <span className="mr-[4px] ml-[4px] text-[24px] font-[600]">{location}</span>
         <ArrowDown />
@@ -31,14 +36,13 @@ export default function Filter({ location, jobs, onChangeJobs }: FilterProps) {
             <span className="text-[18px] text-gray-500">선택된 직종이 없습니다</span>
           )}
         </div>
-        <button
-          onClick={onChangeJobs}
+        <Link
+          href="/filter/job"
           className="ml-4 rounded-[10px] border-1 border-[#9292CB] px-[12px] py-[5px] text-[18px] font-[500]"
         >
           변경
-        </button>
+        </Link>
       </div>
     </div>
-    // </div>
   );
 }
