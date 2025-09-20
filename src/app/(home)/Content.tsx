@@ -35,7 +35,7 @@ const employs = [
 
 export default function Content() {
   return (
-    <div className="mt-[18px] p-[16px]">
+    <div className="bg-[#F4F4FB] p-[16px] pt-[25px]">
       <p className="text-[18px] font-[500] text-[#919191]">맞춤 공고</p>
       <div className="mt-4 flex flex-col gap-[20px]">
         {employs.map((employ) => {
