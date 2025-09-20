@@ -1,6 +1,6 @@
-import Search from "../../assets/icon/Search.svg";
-import Location from "../../assets/icon/Location.svg";
-import ArrowDown from "../../assets/icon/ArrowDown.svg";
+import Search from "@/assets/icon/Search.svg";
+import Location from "@/assets/icon/Location.svg";
+import ArrowDown from "@/assets/icon/ArrowDown.svg";
 
 interface HeaderProps {
   location: string;

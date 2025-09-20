@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import LocationGray from "../../assets/icon/LocationGray.svg";
-import TimeGray from "../../assets/icon/TimeGray.svg";
-import HeartOn from "../../assets/icon/HeartOn.svg";
-import HeartOff from "../../assets/icon/HeartOff.svg";
+import LocationGray from "@/assets/icon/LocationGray.svg";
+import TimeGray from "@/assets/icon/TimeGray.svg";
+import HeartOn from "@/assets/icon/HeartOn.svg";
+import HeartOff from "@/assets/icon/HeartOff.svg";
 
 interface CardProps {
   id: number;
