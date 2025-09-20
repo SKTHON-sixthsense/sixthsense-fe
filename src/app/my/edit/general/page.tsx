@@ -33,7 +33,7 @@ export default function EditGeneral() {
 
   return (
     <main>
-      <div className="flex flex-col gap-[15px] bg-[#F4F4FB]">
+      <div className="flex flex-col gap-[15px] bg-[#F4F4FB] pb-[70px]">
         <div className="mt-[15px] flex flex-col gap-[40px] bg-white px-[16px] py-[30px]">
           <div className="flex gap-[12px]">
             {/* 사진 */}
@@ -191,7 +191,12 @@ export default function EditGeneral() {
         </div>
       </div>
 
-      <BottomButton stickToBottom onClick={async () => {}}>
+      <BottomButton
+        stickToBottom
+        onClick={async () => {
+          router.push("/my");
+        }}
+      >
         설정 완료
       </BottomButton>
     </main>
