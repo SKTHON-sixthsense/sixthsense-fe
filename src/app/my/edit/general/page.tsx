@@ -15,6 +15,7 @@ export default function EditGeneral() {
   useHeader({
     title: "나의 정보 수정",
     alignTitle: "center",
+    showBackButton: true,
   });
 
   const experiences = [
@@ -33,7 +34,7 @@ export default function EditGeneral() {
   return (
     <main>
       <div className="flex flex-col gap-[15px] bg-[#F4F4FB]">
-        <div className="flex flex-col gap-[40px] bg-white px-[16px] py-[30px]">
+        <div className="mt-[15px] flex flex-col gap-[40px] bg-white px-[16px] py-[30px]">
           <div className="flex gap-[12px]">
             {/* 사진 */}
             <div className="w-[150px] bg-neutral-200"></div>
@@ -175,7 +176,7 @@ export default function EditGeneral() {
         </div>
 
         {/* 경력 사항 */}
-        <div className="mb-[15px] flex flex-col gap-[10px] bg-white px-[16px] py-[20px]">
+        <div className="flex flex-col gap-[10px] bg-white px-[16px] py-[20px]">
           <span className="text-[20px] font-[500] text-[#707070]">경력 사항</span>
 
           <div className="mb-[20px] flex flex-col gap-[15px]">
@@ -189,6 +190,10 @@ export default function EditGeneral() {
           </BottomButton>
         </div>
       </div>
+
+      <BottomButton stickToBottom onClick={async () => {}}>
+        설정 완료
+      </BottomButton>
     </main>
   );
 }
