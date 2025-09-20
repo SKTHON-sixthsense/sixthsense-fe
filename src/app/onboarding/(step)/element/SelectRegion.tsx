@@ -3,23 +3,18 @@
 import { useState } from "react";
 import CheckPurple from "@/assets/icon/CheckPurple.svg";
 import { useHeaderHeight } from "@/shared/hooks/useHeader";
+import { useQuery } from "@tanstack/react-query";
+import getRegions from "../../(api)/getRegions";
+import { BaseResponse } from "@/shared/api/BaseResponse";
+import useOnboardingStore from "../../(store)/OnboardingStore";
 
 export default function SelectRegion() {
-  const regions = [
-    "서울 전체",
-    "강남구",
-    "강동구",
-    "강북구",
-    "강서구",
-    "관악구",
-    "광진구",
-    "구로구",
-    "금천구",
-    "노원구",
-    "도봉구",
-  ];
+  const { data: regions } = useQuery<BaseResponse<string[]>>({
+    queryKey: ["onboarding", "regions"],
+    queryFn: getRegions,
+  });
 
-  const [selectedRegion, setSelectedRegion] = useState<string>("서울 전체");
+  const { data, setData } = useOnboardingStore();
 
   const headerHeight = useHeaderHeight();
 
@@ -53,8 +48,8 @@ export default function SelectRegion() {
           >
             시/군/구
           </div>
-          {regions.map((region) => {
-            const isSelected = selectedRegion === region;
+          {regions?.data?.map((region) => {
+            const isSelected = data.region === region;
 
             return (
               <button
@@ -62,7 +57,7 @@ export default function SelectRegion() {
                 className={`flex w-full items-center justify-center py-[20px] text-[24px] font-[500] ${
                   isSelected ? "text-primary" : "text-[#686868]"
                 }`}
-                onClick={() => setSelectedRegion(region)}
+                onClick={() => setData({ region })}
               >
                 <span className="relative flex items-center">
                   {region}

@@ -1,37 +1,25 @@
-import { useState } from "react";
 import ItemBlock from "../../(component)/ItemBlock";
+import { useQuery } from "@tanstack/react-query";
+import getJob from "../../(api)/getJob";
+import { BaseResponse } from "@/shared/api/BaseResponse";
+import useOnboardingStore from "../../(store)/OnboardingStore";
 
 export default function SelectJob() {
-  const jobs = [
-    {
-      id: 1,
-      name: "경비 및 보안",
-    },
-    {
-      id: 2,
-      name: "주차관리 및 안내",
-    },
-    {
-      id: 3,
-      name: "청소 및 미화",
-    },
-    {
-      id: 4,
-      name: "매장 관리",
-    },
-  ];
-
-  const [selectedJob, setSelectedJob] = useState<number | null>(null);
+  const { data: jobs } = useQuery<BaseResponse<string[]>>({
+    queryKey: ["onboarding", "jobs"],
+    queryFn: () => getJob(data.jobField),
+  });
+  const { data, setData } = useOnboardingStore();
 
   return (
     <div className="flex flex-col gap-[10px] px-[16px]">
-      {jobs.map((job) => (
+      {jobs?.data?.map((job) => (
         <ItemBlock
-          key={job.id}
-          name={job.name}
-          selected={selectedJob === job.id}
+          key={job}
+          name={job}
+          selected={data.job.includes(job)}
           onClick={() => {
-            setSelectedJob(job.id);
+            setData({ job: [...data.job, job] });
           }}
         />
       ))}
