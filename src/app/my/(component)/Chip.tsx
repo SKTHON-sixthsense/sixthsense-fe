@@ -19,14 +19,14 @@ const Chip = ({ title, onDelete }: ChipProps) => {
             <path
               d="M6.75 6.65381L18 17.9038"
               stroke="#919191"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
             <path
               d="M18 6.65381L6.75003 17.9038"
               stroke="#919191"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
           </svg>
         </button>
