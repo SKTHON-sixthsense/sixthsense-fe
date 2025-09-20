@@ -16,7 +16,7 @@ const BottomButton = ({ children, onClick, disabled, stickToBottom }: BottomButt
     <div
       className={
         stickToBottom
-          ? "fixed right-0 bottom-0 left-0 rounded-t-[10px] bg-white px-[16px] py-[10px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+          ? "fixed right-0 bottom-0 left-0 z-50 rounded-t-[10px] bg-white px-[16px] py-[10px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
           : ""
       }
     >
