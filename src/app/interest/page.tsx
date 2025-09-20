@@ -30,7 +30,7 @@ export default function InterestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F4FB]">
+    <div className="mb-[90px] min-h-screen bg-[#F4F4FB]">
       <header className="w-full bg-white pt-[20px]">
         <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관심 정보</p>
       </header>
