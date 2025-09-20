@@ -43,6 +43,7 @@ export default function Onboarding() {
           </p>
         )}
       </div>
+
       {/* 단계별 컴포넌트 */}
       {currentStep?.element}
 

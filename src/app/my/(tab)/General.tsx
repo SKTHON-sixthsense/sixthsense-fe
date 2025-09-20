@@ -1,6 +1,8 @@
+import Link from "next/link";
 import Chip from "../(component)/Chip";
 import ExperienceCard from "../(component)/ExperienceCard";
 import EmployCard from "@/app/(home)/EmployCard";
+import PencilPurple from "@/assets/icon/PencilPurple.svg";
 
 export default function General() {
   const info = {
@@ -28,10 +30,18 @@ export default function General() {
     <>
       <section
         id="general"
-        className="flex flex-col gap-[30px] bg-white px-[16px] pt-[50px] pb-[20px]"
+        className="flex flex-col gap-[30px] bg-white px-[16px] pt-[20px] pb-[20px]"
       >
+        {/* 수정하기 */}
+        <Link
+          href="/my/edit/general"
+          className="inline-flex items-center justify-end gap-[5px] text-right text-[18px] font-[500] text-[#B45EC9] underline underline-offset-auto"
+        >
+          수정하기 <PencilPurple />
+        </Link>
+
         {/* 인적사항 */}
-        <div className="flex gap-[16px]">
+        <div className="mt-[10px] flex gap-[16px]">
           {/* 사진 */}
           <div className="w-[120px] bg-neutral-200"></div>
 

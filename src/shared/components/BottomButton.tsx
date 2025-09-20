@@ -4,12 +4,19 @@ import { useState } from "react";
 
 interface BottomButton {
   children: React.ReactNode;
+  variant?: "primary" | "secondary";
   onClick: () => Promise<void>;
   disabled?: boolean;
   stickToBottom?: boolean;
 }
 
-const BottomButton = ({ children, onClick, disabled, stickToBottom }: BottomButton) => {
+const BottomButton = ({
+  children,
+  variant = "primary",
+  onClick,
+  disabled,
+  stickToBottom,
+}: BottomButton) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -21,7 +28,11 @@ const BottomButton = ({ children, onClick, disabled, stickToBottom }: BottomButt
       }
     >
       <button
-        className="relative w-full rounded-[10px] bg-primary px-[20px] py-[13px] text-[20px] font-[600] text-white"
+        className={`relative w-full rounded-[10px] px-[20px] py-[13px] text-[20px] font-[600] ${
+          variant === "primary"
+            ? "bg-primary text-white"
+            : "border border-primary bg-white text-primary"
+        }`}
         disabled={disabled}
         onClick={() => {
           setIsLoading(true);
@@ -33,7 +44,11 @@ const BottomButton = ({ children, onClick, disabled, stickToBottom }: BottomButt
         <span className={isLoading ? "invisible" : ""}>{children}</span>
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-[20px] w-[20px] animate-spin rounded-full border-2 border-white border-t-transparent" />
+            <div
+              className={`h-[20px] w-[20px] animate-spin rounded-full border-2 border-t-transparent ${
+                variant === "primary" ? "border-white" : "border-primary"
+              }`}
+            />
           </div>
         )}
       </button>
