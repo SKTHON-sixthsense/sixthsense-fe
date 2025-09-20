@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useHeaderStore, { HeaderStore } from "../stores/HeaderStore";
 
 /**
@@ -21,6 +21,17 @@ const useHeader = ({
   useEffect(() => {
     update({ title, alignTitle, showBackButton, secondaryButton, progress });
   }, [title, alignTitle, showBackButton, secondaryButton, progress, update]);
+};
+
+export const useHeaderHeight = () => {
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    const header = document.querySelector("header");
+    setHeaderHeight(header?.offsetHeight || 0);
+  }, []);
+
+  return headerHeight;
 };
 
 export default useHeader;
