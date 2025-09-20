@@ -2,7 +2,7 @@
 
 import useHeader from "@/shared/hooks/useHeader";
 import useOnboardingStore from "./(store)/OnboardingStore";
-import Steps from "./(step)";
+import useSteps from "./(step)";
 import BottomButton from "@/shared/components/BottomButton";
 import { useRouter } from "next/navigation";
 
@@ -10,9 +10,10 @@ export default function Onboarding() {
   const router = useRouter();
 
   const { step, goNext, goPrevious } = useOnboardingStore();
+  const steps = useSteps(); // Now using the dynamic hook
 
-  const stepsCount = Object.keys(Steps).length;
-  const currentStep = Steps?.[step];
+  const stepsCount = Object.keys(steps).length;
+  const currentStep = steps?.[step];
 
   useHeader({
     title: currentStep?.title,
@@ -27,6 +28,18 @@ export default function Onboarding() {
     },
     progress: step * (100 / stepsCount),
   });
+
+  const { data } = useOnboardingStore();
+
+  const handleStart = () => {
+    localStorage.setItem("onboardingComplete", "true");
+
+    localStorage.setItem("district", data.region);
+    localStorage.setItem("jobCategories", data.jobField);
+    localStorage.setItem("detailedJobCategories", JSON.stringify(data.job));
+
+    router.push("/");
+  };
 
   return (
     <main>
@@ -53,7 +66,7 @@ export default function Onboarding() {
         onClick={async () => {
           if (step === stepsCount) {
             // 끝
-            console.log("시작하기");
+            handleStart();
           } else {
             goNext();
           }

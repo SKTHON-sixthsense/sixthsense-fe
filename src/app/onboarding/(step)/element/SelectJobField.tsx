@@ -1,45 +1,27 @@
 import { useState } from "react";
 import ItemBlock from "../../(component)/ItemBlock";
+import { useQuery } from "@tanstack/react-query";
+import getJobField from "../../(api)/getJobField";
+import { BaseResponse } from "@/shared/api/BaseResponse";
+import useOnboardingStore from "../../(store)/OnboardingStore";
 
 export default function SelectJobField() {
-  const jobs = [
-    {
-      id: 1,
-      name: "시설관리 및 운영",
-    },
-    {
-      id: 2,
-      name: "요식업",
-    },
-    {
-      id: 3,
-      name: "운전 및 배송",
-    },
-    {
-      id: 4,
-      name: "판매직",
-    },
-    {
-      id: 5,
-      name: "가사 및 돌봄",
-    },
-    {
-      id: 6,
-      name: "일용직",
-    },
-  ];
+  const { data: jobs } = useQuery<BaseResponse<string[]>>({
+    queryKey: ["onboarding", "jobs"],
+    queryFn: getJobField,
+  });
 
-  const [selectedJobField, setSelectedJob] = useState<number | null>(null);
+  const { data, setData } = useOnboardingStore();
 
   return (
-    <div className="flex flex-col gap-[10px] px-[16px]">
-      {jobs.map((job) => (
+    <div className="flex flex-col gap-[10px] px-[16px] pb-[90px]">
+      {jobs?.data?.map((job) => (
         <ItemBlock
-          key={job.id}
-          name={job.name}
-          selected={selectedJobField === job.id}
+          key={job}
+          name={job}
+          selected={data.jobField === job}
           onClick={() => {
-            setSelectedJob(job.id);
+            setData({ jobField: job });
           }}
         />
       ))}
