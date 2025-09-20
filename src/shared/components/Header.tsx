@@ -6,17 +6,18 @@ import useHeaderStore from "@/shared/stores/HeaderStore";
 
 const Header = () => {
   const router = useRouter();
-  const { title, alignTitle, showBackButton, secondaryButton, progress } = useHeaderStore();
+  const { title, alignTitle, showBackButton, onBackButtonClick, secondaryButton, progress } =
+    useHeaderStore();
 
   return (
     <header className="sticky inset-0 top-0 z-[999] flex items-center bg-white p-[16px]">
       {showBackButton && (
-        <button onClick={() => router.back()}>
+        <button onClick={onBackButtonClick ? onBackButtonClick : () => router.back()}>
           <ChevronRight width={32} height={32} />
         </button>
       )}
 
-      <h1 className="text-[24px] font-[600]" style={{ textAlign: alignTitle }}>
+      <h1 className="w-full text-[24px] font-[600]" style={{ textAlign: alignTitle }}>
         {title}
       </h1>
 
