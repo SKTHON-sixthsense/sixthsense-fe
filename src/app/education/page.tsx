@@ -19,7 +19,7 @@ export default function EduPage() {
   useEffect(() => {
     const fetchEdus = async () => {
       try {
-        const res = await privateAPI.get("/api/v1/educations");
+        const res = await privateAPI.get("/v1/educations");
         if (res.data.success) {
           setEdus(res.data.data);
         } else {
@@ -36,13 +36,16 @@ export default function EduPage() {
   }, []);
 
   return (
-    <div className="bg-[#F4F4FB]">
+    <div className="mb-[90px] bg-[#F4F4FB]">
       <header className="w-full bg-white pt-[20px]">
         <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관련 교육</p>
       </header>
 
       {/* 광고 배너 */}
-      <div className="mt-[15px] bg-[#8AD7CA] p-[24px] text-[20px] font-[600] text-white">
+      <div
+        className="mt-[15px] cursor-pointer bg-[#8AD7CA] p-[24px] text-[20px] font-[600] text-white"
+        onClick={() => window.open("https://news.seoul.go.kr/welfare/50plus", "_blank")}
+      >
         <div className="flex gap-[30px]">
           <span>중장년이 열어가는 앞으로의 50년</span>
           <StarAd />

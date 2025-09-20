@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useFavorites } from "@/shared/hooks/useFavorites";
 
 import HeartOn from "@/assets/icon/HeartOn.svg";
 import HeartOff from "@/assets/icon/HeartOff.svg";
@@ -10,12 +10,11 @@ interface CardProps {
   id: number;
   title: string;
   desc: string;
-  onToggleHeart?: (id: number, isLiked: boolean) => void;
 }
 
-export default function EduCard({ id, title, desc, onToggleHeart }: CardProps) {
-  const [isLiked, setIsLiked] = useState(false);
+export default function EduCard({ id, title, desc }: CardProps) {
   const router = useRouter();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleCardClick = () => {
     router.push(`/education/${id}`);
@@ -23,11 +22,12 @@ export default function EduCard({ id, title, desc, onToggleHeart }: CardProps) {
 
   const handleHeartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newState = !isLiked;
-    setIsLiked(newState);
-    if (onToggleHeart) {
-      onToggleHeart(id, newState);
-    }
+    toggleFavorite({
+      id,
+      type: "education",
+      title,
+      desc,
+    });
   };
 
   return (
@@ -38,7 +38,7 @@ export default function EduCard({ id, title, desc, onToggleHeart }: CardProps) {
       <div className="flex items-center justify-between">
         <span className="text-[28px] font-[600]">{title}</span>
         <button onClick={handleHeartClick} className="p-1">
-          {isLiked ? <HeartOn /> : <HeartOff />}
+          {isFavorite(id, "education") ? <HeartOn /> : <HeartOff />}
         </button>
       </div>
       <p className="text-[20px] font-[400] text-[#686868]">{desc}</p>

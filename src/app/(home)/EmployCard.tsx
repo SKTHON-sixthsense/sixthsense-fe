@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useFavorites } from "@/shared/hooks/useFavorites";
 
 import LocationGray from "@/assets/icon/LocationGray.svg";
 import TimeGray from "@/assets/icon/TimeGray.svg";
@@ -17,7 +17,6 @@ interface CardProps {
   date: string;
   time: string;
   pay: number;
-  onToggleHeart?: (id: number, isLiked: boolean) => void;
 }
 
 export default function EmployCard({
@@ -29,10 +28,9 @@ export default function EmployCard({
   date,
   time,
   pay,
-  onToggleHeart,
 }: CardProps) {
-  const [isLiked, setIsLiked] = useState(false);
   const router = useRouter();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleCardClick = () => {
     router.push(`/employ/${id}`);
@@ -40,11 +38,17 @@ export default function EmployCard({
 
   const handleHeartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newState = !isLiked;
-    setIsLiked(newState);
-    if (onToggleHeart) {
-      onToggleHeart(id, newState);
-    }
+    toggleFavorite({
+      id,
+      type: "employ",
+      title,
+      store,
+      location,
+      date,
+      time,
+      pay,
+      uploadDate,
+    });
   };
 
   return (
@@ -55,7 +59,7 @@ export default function EmployCard({
       <div className="flex items-center justify-between font-[400] text-[#919191]">
         <span>{uploadDate}</span>
         <button onClick={handleHeartClick} className="p-1">
-          {isLiked ? <HeartOn /> : <HeartOff />}
+          {isFavorite(id, "employ") ? <HeartOn /> : <HeartOff />}
         </button>
       </div>
       <p className="text-[28px] font-[600]">{title}</p>

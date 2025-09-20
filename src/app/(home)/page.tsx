@@ -27,6 +27,7 @@ interface Employ {
   preferredQualifications: string;
   homepageUrl: string;
   callNum: string;
+  createDate: string;
 }
 
 export default function HomePage() {
@@ -37,7 +38,7 @@ export default function HomePage() {
     const fetchEmploys = async () => {
       try {
         setLoading(true);
-        const res = await privateAPI.get("/api/search/results", {});
+        const res = await privateAPI.get("/search/results", {});
         console.log(res);
 
         if (res.data.success) {

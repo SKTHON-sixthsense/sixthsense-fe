@@ -37,7 +37,7 @@ export default function EduDetailPage() {
   useEffect(() => {
     const fetchEdu = async () => {
       try {
-        const res = await privateAPI.get(`/api/v1/educations/${id}`);
+        const res = await privateAPI.get(`/v1/educations/${id}`);
 
         if (res.data.success) {
           setEdu(res.data.data);
@@ -69,7 +69,7 @@ export default function EduDetailPage() {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl bg-[#F4F4FB] pb-4">
+    <div className="mx-auto mb-[90px] min-h-screen max-w-3xl bg-[#F4F4FB] pb-4">
       <Header />
 
       {edu.s3url && (
