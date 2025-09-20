@@ -4,9 +4,12 @@ import useHeader from "@/shared/hooks/useHeader";
 import useOnboardingStore from "./(store)/OnboardingStore";
 import Steps from "./(step)";
 import BottomButton from "@/shared/components/BottomButton";
+import { useRouter } from "next/navigation";
 
 export default function Onboarding() {
-  const { step, goNext } = useOnboardingStore();
+  const router = useRouter();
+
+  const { step, goNext, goPrevious } = useOnboardingStore();
 
   const stepsCount = Object.keys(Steps).length;
   const currentStep = Steps?.[step];
@@ -15,6 +18,13 @@ export default function Onboarding() {
     title: currentStep?.title,
     alignTitle: "center",
     showBackButton: true,
+    onBackButtonClick: () => {
+      if (step === 1) {
+        router.back();
+      } else {
+        goPrevious();
+      }
+    },
     progress: step * (100 / stepsCount),
   });
 
@@ -38,7 +48,6 @@ export default function Onboarding() {
 
       {/* 하단 버튼 고정 */}
       <BottomButton
-        text={step === stepsCount ? "시작하기" : "다음으로"}
         stickToBottom
         onClick={async () => {
           if (step === stepsCount) {
@@ -48,7 +57,9 @@ export default function Onboarding() {
             goNext();
           }
         }}
-      />
+      >
+        {step === stepsCount ? "시작하기" : "다음으로"}
+      </BottomButton>
     </main>
   );
 }
