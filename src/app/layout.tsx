@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AIAssistant } from "@/shared/components/AIAssistant";
 import Providers from "@/shared/providers";
 
 export const metadata: Metadata = {
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <AIAssistant />
+        </Providers>
       </body>
     </html>
   );
