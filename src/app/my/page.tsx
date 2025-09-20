@@ -5,15 +5,15 @@ import Introduction from "@/app/my/(tab)/Introduction";
 import BottomNavigation from "@/shared/components/BottomNavigation";
 import Header from "@/shared/components/Header";
 import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
-import { parseAsString, useQueryState } from "nuqs";
-
+import { useQueryStateWithoutSuspense } from "@/shared/hooks/useQueryStateWIthoutSuspense";
+import { parseAsString } from "nuqs";
 export default function My() {
   useHeader({
     title: "나의 정보",
     alignTitle: "center",
   });
 
-  const [tab, setTab] = useQueryState(
+  const [tab, setTab] = useQueryStateWithoutSuspense(
     "tab",
     parseAsString.withDefault("general").withOptions({ clearOnDefault: false })
   );
