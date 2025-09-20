@@ -5,7 +5,8 @@ import Introduction from "@/app/my/(tab)/Introduction";
 import BottomNavigation from "@/shared/components/BottomNavigation";
 import Header from "@/shared/components/Header";
 import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
-import { useState } from "react";
+import { useQueryStateWithoutSuspense } from "@/shared/hooks/useQueryStateWIthoutSuspense";
+import { parseAsString } from "nuqs";
 
 export default function My() {
   useHeader({
@@ -13,7 +14,10 @@ export default function My() {
     alignTitle: "center",
   });
 
-  const [tab, setTab] = useState<"general" | "introduction">("general");
+  const [tab, setTab] = useQueryStateWithoutSuspense(
+    "tab",
+    parseAsString.withDefault("general").withOptions({ clearOnDefault: false })
+  );
 
   const headerHeight = useHeaderHeight();
 
