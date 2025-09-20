@@ -72,7 +72,7 @@ export default function EmployCard({
       <div className="mt-[15px] flex items-center justify-between rounded-[10px] bg-[#F4F4FB] pt-[10px] pr-[14px] pb-[10px] pl-[14px]">
         <span className="text-[24px] font-[500]">시급</span>
         <div>
-          <span className="text-[30px] font-[600]">{pay}</span>
+          <span className="text-[30px] font-[600]">{pay.toLocaleString()} </span>
           <span className="ml-[3px] text-[24px] font-[500]">원</span>
         </div>
       </div>
