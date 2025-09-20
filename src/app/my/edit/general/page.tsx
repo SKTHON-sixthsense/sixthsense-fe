@@ -6,6 +6,8 @@ import Chip from "../../(component)/Chip";
 import BottomButton from "@/shared/components/BottomButton";
 import ExperienceCard from "../../(component)/ExperienceCard";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Profile from "@/assets/image/Profile.png";
 
 export default function EditGeneral() {
   const router = useRouter();
@@ -37,7 +39,12 @@ export default function EditGeneral() {
         <div className="mt-[15px] flex flex-col gap-[40px] bg-white px-[16px] py-[30px]">
           <div className="flex gap-[12px]">
             {/* 사진 */}
-            <div className="w-[150px] bg-neutral-200"></div>
+            <Image
+              src={Profile}
+              width={120}
+              className="overflow-hidden rounded-[10px] bg-neutral-200"
+              alt=""
+            />
 
             {/* 인적사항 */}
             <div className="flex flex-col gap-[20px]">

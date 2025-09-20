@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import getMyInfo, { MyInfo } from "../(api)/getMyInfo";
 import { BaseResponse } from "@/shared/api/BaseResponse";
 import getCareer, { Career } from "../(api)/getCareer";
+import Image from "next/image";
+import Profile from "@/assets/image/Profile.png";
 
 export default function General() {
   const { data: myInfoResponse } = useQuery<BaseResponse<MyInfo>>({
@@ -36,7 +38,12 @@ export default function General() {
         {/* 인적사항 */}
         <div className="mt-[10px] flex gap-[16px]">
           {/* 사진 */}
-          <div className="w-[120px] bg-neutral-200"></div>
+          <Image
+            src={Profile}
+            width={120}
+            className="overflow-hidden rounded-[10px] bg-neutral-200"
+            alt=""
+          />
 
           {/* 인적사항 */}
           <div className="flex flex-1 flex-col gap-[20px]">
