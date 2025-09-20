@@ -1,6 +1,7 @@
 import AiSection from "./AiSection";
 import Content from "./Content";
 import FilterBar from "./FilterBar";
+// import { privateAPI } from "@/shared/api/apiInstance";
 
 import Logo from "@/assets/icon/Logo.svg";
 
