@@ -22,10 +22,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return <SplashScreen />;
   }
 
-  return (
-    <>
-      {children}
-      <BottomNavigation />
-    </>
-  );
+  return children;
 }
