@@ -19,7 +19,7 @@ export default function EduPage() {
   useEffect(() => {
     const fetchEdus = async () => {
       try {
-        const res = await privateAPI.get("/api/v1/educations");
+        const res = await privateAPI.get("/v1/educations");
         if (res.data.success) {
           setEdus(res.data.data);
         } else {
@@ -36,7 +36,7 @@ export default function EduPage() {
   }, []);
 
   return (
-    <div className="bg-[#F4F4FB]">
+    <div className="mb-[90px] bg-[#F4F4FB]">
       <header className="w-full bg-white pt-[20px]">
         <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관련 교육</p>
       </header>
