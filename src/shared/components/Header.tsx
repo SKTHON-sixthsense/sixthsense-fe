@@ -4,7 +4,7 @@ import ChevronRight from "@/assets/icon/ChevronRight.svg";
 import { useRouter } from "next/navigation";
 import useHeaderStore from "@/shared/stores/HeaderStore";
 
-export const Header = () => {
+const Header = () => {
   const router = useRouter();
   const { title, alignTitle, showBackButton, secondaryButton, progress } = useHeaderStore();
 
@@ -33,3 +33,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;
