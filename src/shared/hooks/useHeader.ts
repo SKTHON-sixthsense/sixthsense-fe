@@ -27,11 +27,30 @@ const useHeader = ({
 
 export const useHeaderHeight = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
+  const { progress } = useHeaderStore();
 
   useEffect(() => {
+    const updateHeaderHeight = () => {
+      const header = document.querySelector("header");
+      if (header) {
+        setHeaderHeight(header.offsetHeight);
+      }
+    };
+
+    // Initial measurement
+    updateHeaderHeight();
+
+    // Use ResizeObserver to detect header size changes
     const header = document.querySelector("header");
-    setHeaderHeight(header?.offsetHeight || 0);
-  }, []);
+    if (header) {
+      const resizeObserver = new ResizeObserver(updateHeaderHeight);
+      resizeObserver.observe(header);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [progress]); // Re-run when progress changes (which affects header height)
 
   return headerHeight;
 };

@@ -8,8 +8,14 @@ import BottomNavigation from "@/shared/components/BottomNavigation";
 import LocationGray from "@/assets/icon/LocationGray.svg";
 import TimeGray from "@/assets/icon/TimeGray.svg";
 import HeartOn from "@/assets/icon/HeartOn.svg";
+import useHeader from "@/shared/hooks/useHeader";
 
 export default function InterestPage() {
+  useHeader({
+    title: "관심 정보",
+    alignTitle: "left",
+  });
+
   const router = useRouter();
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -31,10 +37,6 @@ export default function InterestPage() {
 
   return (
     <div className="mb-[90px] min-h-screen bg-[#F4F4FB]">
-      <header className="w-full bg-white pt-[20px]">
-        <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관심 정보</p>
-      </header>
-
       <div className="space-y-8 p-4">
         {/* 관심 공고 섹션 */}
         <div>
