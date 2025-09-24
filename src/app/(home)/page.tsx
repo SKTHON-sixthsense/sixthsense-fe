@@ -16,7 +16,8 @@ interface Employ {
   s3Url: string;
   status: string;
   workLocation: string;
-  salary: string;
+  salary: number;
+  salaryType: string;
   workDays: string;
   workHours: string;
   jobCategory: string;

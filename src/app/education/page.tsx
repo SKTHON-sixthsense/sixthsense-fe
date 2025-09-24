@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import EduCard from "./EduCard";
 import StarAd from "@/assets/icon/StarAd.svg";
 import { privateAPI } from "@/shared/api/apiInstance";
+import BottomNavigation from "@/shared/components/BottomNavigation";
 
 type Edu = {
   id: number;
@@ -36,7 +37,7 @@ export default function EduPage() {
   }, []);
 
   return (
-    <div className="mb-[90px] bg-[#F4F4FB]">
+    <div className="bg-[#F4F4FB]">
       <header className="w-full bg-white pt-[20px]">
         <p className="pb-[16px] pl-[16px] text-[24px] font-[600]">관련 교육</p>
       </header>
@@ -66,6 +67,7 @@ export default function EduPage() {
           <p className="text-center text-gray-500">교육 정보가 없습니다.</p>
         )}
       </div>
+      <BottomNavigation />
     </div>
   );
 }
