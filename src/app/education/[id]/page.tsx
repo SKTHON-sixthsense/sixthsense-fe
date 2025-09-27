@@ -65,7 +65,7 @@ export default function EduDetailPage() {
     // if (edu?.s3url) {
     //   window.open(edu.s3url, "_blank");
     // }
-    alert("hi");
+    alert("더 알아보기");
   };
 
   return (
