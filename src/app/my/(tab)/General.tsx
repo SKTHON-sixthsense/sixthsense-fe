@@ -133,6 +133,7 @@ export default function General() {
           date="요일협의"
           time="10:00~16:00"
           pay={12000}
+          salaryType="시급"
         />
       </section>
     </>

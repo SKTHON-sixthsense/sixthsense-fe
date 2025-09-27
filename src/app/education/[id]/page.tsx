@@ -9,7 +9,6 @@ import Image from "next/image";
 import Header from "@/shared/components/Header";
 import { privateAPI } from "@/shared/api/apiInstance";
 
-// API 응답 타입 정의
 interface Edu {
   id: number;
   title: string;
@@ -63,13 +62,14 @@ export default function EduDetailPage() {
   }
 
   const handleAbout = async () => {
-    if (edu?.s3url) {
-      window.open(edu.s3url, "_blank");
-    }
+    // if (edu?.s3url) {
+    //   window.open(edu.s3url, "_blank");
+    // }
+    alert("hi");
   };
 
   return (
-    <div className="mx-auto mb-[90px] min-h-screen max-w-3xl bg-[#F4F4FB] pb-4">
+    <div className="mx-auto min-h-screen max-w-3xl bg-[#F4F4FB] pb-[90px]">
       <Header />
 
       {edu.s3url && (

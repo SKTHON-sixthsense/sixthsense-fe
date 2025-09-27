@@ -6,7 +6,8 @@ interface ContentProps {
     postName: string;
     companyName: string;
     workLocation: string;
-    salary: string;
+    salary: number;
+    salaryType: string;
     workDays: string;
     workHours: string;
     createDate: string;
@@ -23,6 +24,7 @@ export default function Content({ employs, loading }: ContentProps) {
     return <div className="p-4 text-center text-white">조건에 맞는 공고가 없습니다.</div>;
   }
 
+  console.log(employs);
   return (
     <div className="bg-[#F4F4FB] p-[16px] pt-[25px]">
       <p className="text-[18px] font-[500] text-[#919191]">맞춤 공고</p>
@@ -39,7 +41,8 @@ export default function Content({ employs, loading }: ContentProps) {
               date={employ.workDays}
               uploadDate={employ.createDate}
               time={employ.workHours}
-              pay={Number(employ.salary.replace(/\D/g, "")) || 0}
+              pay={employ.salary}
+              salaryType={employ.salaryType}
             />
           );
         })}
