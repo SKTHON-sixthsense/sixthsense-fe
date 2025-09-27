@@ -14,6 +14,7 @@ interface Edu {
   title: string;
   description: string;
   s3url?: string;
+  homepageUrl?: string;
   requirement: string;
   competentAuthority: string;
   issuingAuthority: string;
@@ -62,10 +63,11 @@ export default function EduDetailPage() {
   }
 
   const handleAbout = async () => {
-    // if (edu?.s3url) {
-    //   window.open(edu.s3url, "_blank");
-    // }
-    alert("hi");
+    if (edu?.s3url) {
+      window.open(edu.homepageUrl, "_blank");
+    } else {
+      alert("교육 URL이 없습니다.");
+    }
   };
 
   return (
@@ -81,6 +83,7 @@ export default function EduDetailPage() {
             height={232}
             className="h-[232px] w-full object-cover"
             unoptimized
+            onError={(e) => console.error("이미지 로드 실패", edu.s3url, e)}
           />
         </div>
       )}

@@ -40,8 +40,6 @@ export default function HomePage() {
       try {
         setLoading(true);
         const res = await privateAPI.get("/search/results", {});
-        console.log(res);
-
         if (res.data.success) {
           setEmploys(res.data.data);
         } else {

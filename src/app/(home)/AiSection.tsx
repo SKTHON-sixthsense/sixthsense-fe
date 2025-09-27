@@ -12,6 +12,7 @@ export default function AiSection() {
     uploadDate: "09.18",
     time: "18:00~22:00",
     pay: 10000,
+    salaryType: "시급",
   };
   const router = useRouter();
   const handleCardClick = () => {
@@ -30,7 +31,7 @@ export default function AiSection() {
           {recommended.location.split(" ").slice(0, 3).join(" ")}
         </p>
         <p className="mt-[2px] text-[20px] font-[600]">
-          <span className="mr-1 mr-[10px] text-[#B45EC9]">시급</span>
+          <span className="mr-1 mr-[10px] text-[#B45EC9]">{recommended.salaryType}</span>
           {recommended.pay.toLocaleString()}원
         </p>
       </div>
