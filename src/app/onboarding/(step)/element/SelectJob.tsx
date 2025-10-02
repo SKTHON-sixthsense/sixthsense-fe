@@ -19,7 +19,11 @@ export default function SelectJob() {
           name={job}
           selected={data.job.includes(job)}
           onClick={() => {
-            setData({ job: [...data.job, job] });
+            if (data.job.includes(job)) {
+              setData({ job: data.job.filter((j) => j !== job) });
+            } else {
+              setData({ job: [...data.job, job] });
+            }
           }}
         />
       ))}

@@ -5,12 +5,13 @@ import useOnboardingStore from "./(store)/OnboardingStore";
 import useSteps from "./(step)";
 import BottomButton from "@/shared/components/BottomButton";
 import { useRouter } from "next/navigation";
+import useSearchJobPosting from "./(hook)/useSearchJobPosting";
 
 export default function Onboarding() {
   const router = useRouter();
 
   const { step, goNext, goPrevious } = useOnboardingStore();
-  const steps = useSteps(); // Now using the dynamic hook
+  const steps = useSteps();
 
   const stepsCount = Object.keys(steps).length;
   const currentStep = steps?.[step];
@@ -31,12 +32,20 @@ export default function Onboarding() {
 
   const { data } = useOnboardingStore();
 
+  const { mutate: searchJobPosting } = useSearchJobPosting();
+
   const handleStart = () => {
     localStorage.setItem("onboardingComplete", "true");
 
     localStorage.setItem("district", data.region);
     localStorage.setItem("jobCategories", data.jobField);
     localStorage.setItem("detailedJobCategories", JSON.stringify(data.job));
+
+    searchJobPosting({
+      district: data.region,
+      jobCategories: [data.jobField],
+      detailedJobCategories: data.job,
+    });
 
     router.push("/");
   };
@@ -71,6 +80,11 @@ export default function Onboarding() {
             goNext();
           }
         }}
+        disabled={
+          Array.isArray(Object.values(data)?.[step - 1])
+            ? Object.values(data)?.[step - 1].length === 0
+            : Object.values(data)?.[step - 1] === undefined
+        }
       >
         {step === stepsCount ? "시작하기" : "다음으로"}
       </BottomButton>
