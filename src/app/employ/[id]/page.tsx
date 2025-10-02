@@ -23,7 +23,7 @@ interface Employ {
   s3Url: string;
   status: string;
   workLocation: string;
-  salary: number;
+  salary: string;
   salaryType: string;
   workDays: string;
   workHours: string;
@@ -161,7 +161,7 @@ export default function EmployDetailPage() {
               <div className="mr-[7px] rounded-[20px] bg-[#FFC35D] px-[10px] pt-[3px] text-[18px] text-white">
                 {employ.salaryType}
               </div>
-              {employ.salary.toLocaleString()}원
+              {Number(employ.salary).toLocaleString()}원
             </div>
             <p className="text-[20px] font-[500]">
               <span className="mr-[25px] text-[#919191]">근무요일</span> {employ.workDays}요일
