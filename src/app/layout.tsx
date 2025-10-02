@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AIAssistant } from "@/shared/components/AIAssistant";
 import Providers from "@/shared/providers";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "다시잡",
@@ -15,6 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <body>
         <Providers>
           {children}
