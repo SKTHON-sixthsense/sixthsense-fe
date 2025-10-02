@@ -11,7 +11,7 @@ const searchJobPosting = async ({
   jobCategories,
   detailedJobCategories,
 }: SearchJobPostingRequest) => {
-  const response = await privateAPI.post("/search/jobposting", {
+  const response = await privateAPI.post("/search/jobpostings", {
     district,
     jobCategories,
     detailedJobCategories,
