@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useHeaderStore, { HeaderStore } from "../stores/HeaderStore";
+import { usePathname } from "next/navigation";
 
 /**
  * @description 헤더 상태 관리 훅
@@ -28,6 +29,7 @@ const useHeader = ({
 export const useHeaderHeight = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const { progress } = useHeaderStore();
+  const pathname = usePathname();
 
   useEffect(() => {
     const updateHeaderHeight = () => {
@@ -50,7 +52,7 @@ export const useHeaderHeight = () => {
         resizeObserver.disconnect();
       };
     }
-  }, [progress]); // Re-run when progress changes (which affects header height)
+  }, [progress, pathname]);
 
   return headerHeight;
 };

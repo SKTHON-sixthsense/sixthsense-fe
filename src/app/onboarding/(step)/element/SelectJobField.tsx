@@ -20,7 +20,11 @@ export default function SelectJobField() {
           name={job}
           selected={data.jobField === job}
           onClick={() => {
-            setData({ jobField: job });
+            if (data.jobField === job) {
+              setData({ jobField: undefined });
+            } else {
+              setData({ jobField: job });
+            }
           }}
         />
       ))}

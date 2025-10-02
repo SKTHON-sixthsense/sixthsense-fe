@@ -16,9 +16,10 @@ interface OnboardingStore {
 const useOnboardingStore = create<OnboardingStore>((set) => ({
   step: 1,
   data: {
+    // 순서 중요
+    region: "서울 전체",
     jobField: "",
     job: [],
-    region: "서울 전체",
     health: "",
   },
   setData: (data) => set((state) => ({ data: { ...state.data, ...data } })),

@@ -32,7 +32,7 @@ const BottomButton = ({
           variant === "primary"
             ? "bg-primary text-white"
             : "border border-primary bg-white text-primary"
-        }`}
+        } ${disabled ? "opacity-50" : ""}`}
         disabled={disabled}
         onClick={() => {
           setIsLoading(true);

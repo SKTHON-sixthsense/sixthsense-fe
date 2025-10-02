@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import CheckPurple from "@/assets/icon/CheckPurple.svg";
 import { useHeaderHeight } from "@/shared/hooks/useHeader";
 import { useQuery } from "@tanstack/react-query";
@@ -25,14 +24,14 @@ export default function SelectRegion() {
         {/* 시/도 */}
         <div className="flex-1">
           <div
-            className="sticky top-0 z-10 flex flex-1 items-center justify-center self-start bg-white py-[15px] text-[20px] font-[500] text-[#686868]"
+            className="sticky top-0 z-10 flex h-[60px] flex-1 items-center justify-center self-start bg-white py-[15px] text-[20px] font-[500] text-[#686868]"
             style={{ top: `${headerHeight}px` }}
           >
             시/도
           </div>
           <button
-            className="sticky top-0 z-20 w-full bg-primary py-[20px] text-[24px] font-[500] text-white"
-            style={{ top: `${headerHeight}px` }}
+            className="sticky top-0 z-10 w-full bg-primary py-[20px] text-[24px] font-[500] text-white"
+            style={{ top: `${headerHeight + 60}px` }}
           >
             서울
           </button>
@@ -43,7 +42,7 @@ export default function SelectRegion() {
         {/* 시/군/구 */}
         <div className="flex-1">
           <div
-            className="sticky top-0 z-10 flex flex-1 items-center justify-center self-start bg-white py-[15px] text-[20px] font-[500] text-[#686868]"
+            className="sticky top-0 z-10 flex h-[60px] flex-1 items-center justify-center self-start bg-white py-[15px] text-[20px] font-[500] text-[#686868]"
             style={{ top: `${headerHeight}px` }}
           >
             시/군/구
