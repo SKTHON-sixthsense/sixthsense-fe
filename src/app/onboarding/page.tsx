@@ -82,8 +82,10 @@ export default function Onboarding() {
         }}
         disabled={
           Array.isArray(Object.values(data)?.[step - 1])
-            ? Object.values(data)?.[step - 1].length === 0
-            : Object.values(data)?.[step - 1] === undefined
+            ? typeof Object.values(data)?.[step - 1] === "string"
+              ? Object.values(data)?.[step - 1].length === 0
+              : !Object.values(data)?.[step - 1]
+            : !Object.values(data)?.[step - 1]
         }
       >
         {step === stepsCount ? "시작하기" : "다음으로"}
