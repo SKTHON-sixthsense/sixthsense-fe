@@ -9,21 +9,11 @@ const publicAPI = axios.create({
 });
 
 /**
- * Private Backend API (uses JWT token)
+ * Private Backend API (uses JWT token over cookie)
  */
 const privateAPI = axios.create({
   baseURL: process.env.NEXT_PUBLIC_PRIVATE_API_URL,
   withCredentials: true,
-});
-
-privateAPI.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-
-  return config;
 });
 
 /**
