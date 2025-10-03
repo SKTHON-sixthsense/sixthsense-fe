@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { privateAPI } from "../api/apiInstance";
 
 interface FavoriteItem {
   id: number;
@@ -51,17 +50,11 @@ export const useFavorites = () => {
   };
 
   // 찜하기 토글
-  const toggleFavorite = async (item: FavoriteItem) => {
-    try {
-      const res = await privateAPI.post("/favorites", { id: item.id });
-
-      if (res.data.data === "true") {
-        setFavorites((prev) => [...prev, item]);
-      } else if (res.data.data === "true") {
-        setFavorites((prev) => prev.filter((f) => f.id !== item.id));
-      }
-    } catch (err) {
-      console.error("Failed to toggle favorite", err);
+  const toggleFavorite = (item: FavoriteItem) => {
+    if (isFavorite(item.id, item.type)) {
+      removeFavorite(item.id, item.type);
+    } else {
+      addFavorite(item);
     }
   };
 
