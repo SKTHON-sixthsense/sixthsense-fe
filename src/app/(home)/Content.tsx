@@ -6,7 +6,7 @@ interface ContentProps {
     postName: string;
     companyName: string;
     workLocation: string;
-    salary: number;
+    salary: string;
     salaryType: string;
     workDays: string;
     workHours: string;
