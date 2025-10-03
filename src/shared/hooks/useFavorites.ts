@@ -10,7 +10,7 @@ interface FavoriteItem {
   location?: string;
   date?: string;
   time?: string;
-  pay?: number;
+  pay?: string;
   desc?: string;
   uploadDate?: string;
 }
