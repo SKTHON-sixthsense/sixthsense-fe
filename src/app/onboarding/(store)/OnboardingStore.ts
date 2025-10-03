@@ -6,7 +6,7 @@ interface OnboardingStore {
     jobField: string;
     job: string[];
     region: string;
-    health: string;
+    health: string[];
   };
   goNext: () => void;
   goPrevious: () => void;
@@ -20,7 +20,7 @@ const useOnboardingStore = create<OnboardingStore>((set) => ({
     region: "서울 전체",
     jobField: "",
     job: [],
-    health: "",
+    health: [],
   },
   setData: (data) => set((state) => ({ data: { ...state.data, ...data } })),
   goNext: () => set((state) => ({ step: state.step + 1 })),

@@ -82,9 +82,7 @@ export default function Onboarding() {
         }}
         disabled={
           Array.isArray(Object.values(data)?.[step - 1])
-            ? typeof Object.values(data)?.[step - 1] === "string"
-              ? Object.values(data)?.[step - 1].length === 0
-              : !Object.values(data)?.[step - 1]
+            ? Object.values(data)?.[step - 1].length === 0
             : !Object.values(data)?.[step - 1]
         }
       >
