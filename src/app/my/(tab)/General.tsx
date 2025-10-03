@@ -132,7 +132,7 @@ export default function General() {
           location="서울시 성북구 동선동3가"
           date="요일협의"
           time="10:00~16:00"
-          pay={12000}
+          pay="12000"
           salaryType="시급"
         />
       </section>
