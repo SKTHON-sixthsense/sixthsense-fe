@@ -10,6 +10,8 @@ import Search from "@/assets/icon/Search.svg";
 import { useMemo, useState } from "react";
 import BottomButton from "@/shared/components/BottomButton";
 import { useRouter } from "next/navigation";
+import useLocalStorage from "@/shared/hooks/useLocalStorage";
+import useSearchJobPosting from "@/app/onboarding/(hook)/useSearchJobPosting";
 
 export default function Location() {
   const router = useRouter();
@@ -28,6 +30,11 @@ export default function Location() {
   });
 
   const { data, setData } = useOnboardingStore();
+  const [, setDistrict] = useLocalStorage<string>("district");
+  const [jobCategories] = useLocalStorage<string>("jobCategories");
+  const [detailedJobCategories] = useLocalStorage<string[]>("detailedJobCategories");
+
+  const { mutate: searchJobPosting } = useSearchJobPosting();
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -39,7 +46,15 @@ export default function Location() {
   );
 
   const handleConfirm = () => {
-    localStorage.setItem("district", data.region);
+    setDistrict(data.region);
+
+    // Trigger search with updated district
+    searchJobPosting({
+      district: data.region,
+      jobCategories: jobCategories ? [jobCategories] : [""],
+      detailedJobCategories: detailedJobCategories ?? [],
+    });
+
     router.replace("/");
   };
 

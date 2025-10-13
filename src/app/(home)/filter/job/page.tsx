@@ -3,15 +3,14 @@
 import useHeader, { useHeaderHeight } from "@/shared/hooks/useHeader";
 import { useQuery } from "@tanstack/react-query";
 import { BaseResponse } from "@/shared/api/BaseResponse";
-import getRegions from "@/app/onboarding/(api)/getRegions";
-import useOnboardingStore from "@/app/onboarding/(store)/OnboardingStore";
 import CheckPurple from "@/assets/icon/CheckPurple.svg";
-import Search from "@/assets/icon/Search.svg";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import BottomButton from "@/shared/components/BottomButton";
 import { useRouter } from "next/navigation";
 import getJob from "@/app/onboarding/(api)/getJob";
 import getJobField from "@/app/onboarding/(api)/getJobField";
+import useLocalStorage from "@/shared/hooks/useLocalStorage";
+import useSearchJobPosting from "@/app/onboarding/(hook)/useSearchJobPosting";
 
 export default function Job() {
   const router = useRouter();
@@ -32,13 +31,34 @@ export default function Job() {
   const [selectedJobField, setSelectedJobField] = useState<string>("");
   const [selectedJobs, setSelectedJobs] = useState<string[]>([]);
 
+  const [district] = useLocalStorage<string>("district");
+  const [jobCategories, setJobCategories] = useLocalStorage<string>("jobCategories");
+  const [, setDetailedJobCategories] = useLocalStorage<string[]>("detailedJobCategories");
+
+  const { mutate: searchJobPosting } = useSearchJobPosting();
+
   const { data: job } = useQuery<BaseResponse<string[]>>({
     queryKey: ["filter", "job", selectedJobField],
     queryFn: () => getJob(selectedJobField),
+    enabled: !!selectedJobField, // Only run query when selectedJobField is not empty
   });
 
   const handleConfirm = () => {
-    localStorage.setItem("detailedJobCategories", JSON.stringify(selectedJobs));
+    setDetailedJobCategories(selectedJobs);
+
+    // Update jobCategories if a job field is selected
+    if (selectedJobField) {
+      setJobCategories(selectedJobField);
+    }
+
+    // Trigger search with updated job categories
+    const currentJobCategories = selectedJobField || jobCategories;
+    searchJobPosting({
+      district: district ?? "서울 전체",
+      jobCategories: currentJobCategories ? [currentJobCategories] : [""],
+      detailedJobCategories: selectedJobs,
+    });
+
     router.replace("/");
   };
 

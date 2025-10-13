@@ -7,11 +7,10 @@ import { useRouter } from "next/navigation";
 export default function Filter() {
   const router = useRouter();
 
-  const { value: detailedJobCategories } = useLocalStorage("detailedJobCategories");
+  const [detailedJobCategories] = useLocalStorage<string[]>("detailedJobCategories", []);
+  const jobs = detailedJobCategories ?? [];
 
-  const jobs = detailedJobCategories ? (JSON.parse(detailedJobCategories) as string[]) : [];
-
-  const { value: location } = useLocalStorage("district");
+  const [location] = useLocalStorage<string>("district", "서울 전체");
 
   return (
     <div className="w-full rounded-t-[20px] bg-white p-[16px]">

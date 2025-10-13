@@ -6,6 +6,7 @@ import useSteps from "./(step)";
 import BottomButton from "@/shared/components/BottomButton";
 import { useRouter } from "next/navigation";
 import useSearchJobPosting from "./(hook)/useSearchJobPosting";
+import useLocalStorage from "@/shared/hooks/useLocalStorage";
 
 export default function Onboarding() {
   const router = useRouter();
@@ -33,13 +34,16 @@ export default function Onboarding() {
   const { data } = useOnboardingStore();
 
   const { mutate: searchJobPosting } = useSearchJobPosting();
+  const [, setDistrict] = useLocalStorage<string>("district");
+  const [, setJobCategories] = useLocalStorage<string>("jobCategories");
+  const [, setDetailedJobCategories] = useLocalStorage<string[]>("detailedJobCategories");
 
   const handleStart = () => {
     localStorage.setItem("onboardingComplete", "true");
 
-    localStorage.setItem("district", data.region);
-    localStorage.setItem("jobCategories", data.jobField);
-    localStorage.setItem("detailedJobCategories", JSON.stringify(data.job));
+    setDistrict(data.region);
+    setJobCategories(data.jobField);
+    setDetailedJobCategories(data.job);
 
     searchJobPosting({
       district: data.region,
